@@ -13,6 +13,7 @@ class GPIO
   def config(hash)
     @pins = {} # a hash of available pins
     # set up pins
+    logger.info @pins
     hash.each do |k, v|
       @pins[k] = Pin.new(k.to_s, v[:number])
       export v[:number]
