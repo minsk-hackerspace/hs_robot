@@ -14,15 +14,15 @@ class GPIO
     @pins = {} # a hash of available pins
     # set up pins
     hash.each do |k, v|
+      GPIO.export v[:number]
       @pins[k] = Pin.new(k.to_s, v[:number])
-      export v[:number]
       @pins[k].as v[:direction]
     end
   end
 
   def destroy
     @pins.each do |k, v|
-      unexport v[:number]
+      GPIO.unexport v[:number]
     end
   end
 
