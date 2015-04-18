@@ -1,0 +1,72 @@
+Компилить ядро необязательно, но можно
+
+http://elinux.org/Raspberry_Pi_Kernel_Compilation
+
+
+Запускаем usb-wifi TP-LINK TL-WN727N
+lsusb
+...
+Bus 001 Device 004: ID 148f:7601 Ralink Technology, Corp.
+http://groenholdt.net/Computers/RaspberryPi/MediaTek-MT7601-USB-WIFI-on-the-Raspberry-Pi/MediaTek-MT7601-USB-WIFI-on-the-Raspberry-Pi.html
+
+
+Запуск камеры и простая трансляция по сети
+
+Два одинаковых мануала
+http://www.rs-online.com/designspark/electronics/knowledge-item/raspberry-pi-camera-setup
+http://www.raspberrypi.org/camera-board-available-for-sale/
+
+
+трансляция видеопотока на расбери:
+raspivid -t 0 -w 1280 -h 720 -fps 20 -o - | nc 192.168.0.107 5001
+
+приём и отображение видеопотока на компе с ip 192.168.0.107 
+nc -l -p 5001 | mplayer -fps 24 -cache 1024 -
+
+хитрость в том чтобы fps на принимающей стороне поставить меньше - тогда буфер всегда будет пустой а задержка минимальная
+
+перекомпиляция ffmpeg и Bambuser
+
+http://www.slickstreamer.info/2013/06/use-raspberrypi-csi-camera-module-to.html
+
+
+Gstreamer
+
+fix during install
+http://www.raspberrypi.org/forums/viewtopic.php?f=66&t=34250&start=125
+Create a file /etc/apt/preferences.d/gstreamer with the following contents:
+Package: *
+Pin: origin archive.raspberrypi.org
+Pin-Priority: 1001
+
+
+http://www.raspberry-projects.com/pi/pi-hardware/raspberry-pi-camera/streaming-video-using-gstreamer
+http://pi.gbaman.info/?p=150
+
+
+
+
+
+V4L2
+
+http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=16
+http://www.ics.com/blog/raspberry-pi-camera-module#.VGXS0X-yquE
+
+
+NGIX
+
+
+Flask
+
+http://mattrichardson.com/Raspberry-Pi-Flask/
+
+
+
+Display video stream in html with VLC plugin
+
+http://stackoverflow.com/questions/2245040/display-an-rtsp-video-stream-in-a-web-page
+
+https://wiki.videolan.org/Documentation:WebPlugin/
+
+gentoo:
+emerge npapi-vlc
