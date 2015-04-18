@@ -15,8 +15,8 @@ class GPIO
     # set up pins
     hash.each do |k, v|
       @pins[k] = Pin.new(k.to_s, v[:number])
-      @pins[k].as v[:directions]
       export v[:number]
+      @pins[k].as v[:directions]
     end
   end
 
