@@ -6,9 +6,6 @@ class Robot
   def initialize
     @gpio = GPIO.instance
     @gpio.config(pwm_a: {number: 18, direction: :out}, pwm_b: {number: 19, direction: :out}, dir_a: {number: 23, direction: :out}, dir_b: {number: 24, direction: :out})
-    at_exit do
-      @gpio.destroy
-    end
   end
 
   def forward
@@ -42,5 +39,8 @@ class Robot
     @gpio.pins[:dir_b].off
     @gpio.pins[:pwm_a].off
     @gpio.pins[:pwm_b].off
+  end
+  def destroy
+    @gpio.destroy
   end
 end

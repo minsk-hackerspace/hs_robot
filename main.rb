@@ -35,3 +35,7 @@ get '/answer' do
 
   command
 end
+
+get '/destroy' do
+  robot.destroy
+end
