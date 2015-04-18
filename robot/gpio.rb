@@ -16,7 +16,7 @@ class GPIO
     hash.each do |k, v|
       @pins[k] = Pin.new(k.to_s, v[:number])
       @pins[k].as v[:directions]
-      export v
+      export v[:number]
     end
   end
 
@@ -50,6 +50,7 @@ class GPIO
       File.open("/sys/class/gpio/#{command}", "w") do |f|
         f.write value
       end
+      p 'value'
     end
   end
 end
