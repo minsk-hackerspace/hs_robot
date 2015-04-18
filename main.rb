@@ -6,7 +6,9 @@ require_relative 'robot/robot'
 require_relative 'robot/gpio'
 require_relative 'robot/pin'
 
-@@robot ||= Robot.new
+get '/init' do
+  @@robot ||= Robot.new
+end
 
 get '/' do
   haml :index, layout: :main
