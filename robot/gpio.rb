@@ -13,17 +13,16 @@ class GPIO
   def config(hash)
     @pins = {} # a hash of available pins
     # set up pins
-    logger.info @pins
     hash.each do |k, v|
       @pins[k] = Pin.new(k.to_s, v[:number])
       export v[:number]
-      @pins[k].as v[:directions]
+      @pins[k].as v[:direction]
     end
   end
 
   def destroy
     @pins.each do |k, v|
-      unexport v
+      unexport v[:number]
     end
   end
 
@@ -48,10 +47,18 @@ class GPIO
     end
 
     def write(command, value)
+      log [command, value]
       File.open("/sys/class/gpio/#{command}", "w") do |f|
         f.write value
       end
-      logger.error [command, value]
     end
+
+    def log(msg)
+      puts msg
+      File.open("log.log", "w+") do |f|
+        f.write msg
+      end
+    end
+
   end
 end
