@@ -22,6 +22,7 @@ class GPIO
 
   def destroy
     @pins.each do |k, v|
+      log [k,v]
       GPIO.unexport v[:number]
     end
   end
