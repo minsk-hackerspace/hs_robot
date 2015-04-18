@@ -6,7 +6,7 @@ require_relative 'robot/robot'
 require_relative 'robot/gpio'
 require_relative 'robot/pin'
 
-robot = Robot.new
+@@robot ||= Robot.new
 
 get '/' do
   haml :index, layout: :main
@@ -17,24 +17,24 @@ get '/answer' do
   case params[:keys].to_i
     when 83
       command = 's'
-      robot.forward
+      @@robot.forward
     when 87
       command = 'w'
-      robot.backward
+      @@robot.backward
     when 68
       command = 'd'
-      robot.right
+      @@robot.right
     when 65
       command = 'a'
-      robot.left
+      @@robot.left
     when 32
       command = ' '
-      robot.stop
+      @@robot.stop
   end
 
   command
 end
 
 get '/destroy' do
-  robot.destroy
+  @@robot.destroy
 end
