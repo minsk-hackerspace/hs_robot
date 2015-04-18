@@ -50,7 +50,7 @@ class GPIO
       File.open("/sys/class/gpio/#{command}", "w") do |f|
         f.write value
       end
-      p 'value'
+      logger.error [command, value]
     end
   end
 end
