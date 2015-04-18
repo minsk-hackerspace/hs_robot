@@ -14,33 +14,33 @@ class Robot
   def forward
     @gpio.pins[:dir_a].on
     @gpio.pins[:dir_b].on
-    @gpio.pins[:pwm_a].pwm(100)
-    @gpio.pins[:pwm_b].pwm(100)
+    @gpio.pins[:pwm_a].on
+    @gpio.pins[:pwm_b].on
   end
 
   def backward
     @gpio.pins[:dir_a].off
     @gpio.pins[:dir_b].off
-    @gpio.pins[:pwm_a].pwm(70)
-    @gpio.pins[:pwm_b].pwm(70)
+    @gpio.pins[:pwm_a].on
+    @gpio.pins[:pwm_b].on
   end
 
   def left
     @gpio.pins[:dir_b].on
-    @gpio.pins[:pwm_a].pwm(0)
-    @gpio.pins[:pwm_b].pwm(50)
+    @gpio.pins[:pwm_a].off
+    @gpio.pins[:pwm_b].on
   end
 
   def right
     @gpio.pins[:dir_a].on
-    @gpio.pins[:pwm_a].pwm(50)
-    @gpio.pins[:pwm_b].pwm(0)
+    @gpio.pins[:pwm_a].on
+    @gpio.pins[:pwm_b].off
   end
 
   def stop
     @gpio.pins[:dir_a].off
     @gpio.pins[:dir_b].off
-    @gpio.pins[:pwm_a].pwm(0)
-    @gpio.pins[:pwm_b].pwm(0)
+    @gpio.pins[:pwm_a].off
+    @gpio.pins[:pwm_b].off
   end
 end

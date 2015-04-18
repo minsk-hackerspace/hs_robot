@@ -43,13 +43,13 @@ class GPIO
     end
 
     def read(gpio_num)
-      # File.read("/sys/class/gpio/gpio#{gpio_num}/value").to_i
+      File.read("/sys/class/gpio/gpio#{gpio_num}/value").to_i
     end
 
     def write(command, value)
-      # File.open("/sys/class/gpio/#{command}", "w") do |f|
-      #   f.write value
-      # end
+      File.open("/sys/class/gpio/#{command}", "w") do |f|
+        f.write value
+      end
     end
   end
 end
