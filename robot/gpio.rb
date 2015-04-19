@@ -22,7 +22,7 @@ class GPIO
 
   def destroy
     @pins.each do |k, v|
-      log [k,v]
+      log [k, v]
       GPIO.unexport v.number
     end
   end
@@ -44,13 +44,21 @@ class GPIO
     end
 
     def read(gpio_num)
-      File.read("/sys/class/gpio/gpio#{gpio_num}/value").to_i
+      begin
+        File.read("/sys/class/gpio/gpio#{gpio_num}/value").to_i
+      rescue => e
+        log e.message
+      end
     end
 
     def write(command, value)
       log [command, value]
-      File.open("/sys/class/gpio/#{command}", "w") do |f|
-        f.write value
+      begin
+        File.open("/sys/class/gpio/#{command}", "w") do |f|
+          f.write value
+        end
+      rescue => e
+        log e.message
       end
     end
 
