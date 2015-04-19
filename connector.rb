@@ -13,7 +13,7 @@ loop do
   client = server.accept # Wait for a client to connect
   command = client.recv(10)
   p [command, 'received']
-  case command
+  case command.to_i
     when 83
       @robot.forward
     when 87
