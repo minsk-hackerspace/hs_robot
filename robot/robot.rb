@@ -5,7 +5,7 @@ class Robot
 
   def initialize
     @gpio = GPIO.instance
-    @gpio.config(pwm_a: {number: 18, direction: :out}, pwm_b: {number: 19, direction: :out}, dir_a: {number: 23, direction: :out}, dir_b: {number: 24, direction: :out})
+    @gpio.config(pwm_a: {number: 17, direction: :out}, pwm_b: {number: 18, direction: :out}, dir_a: {number: 23, direction: :out}, dir_b: {number: 24, direction: :out})
   end
 
   def forward
