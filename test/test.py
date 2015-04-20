@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
     #Launch an instance of wsgi server
     app = IPCameraApp()
-    port = 80
+    port = 8080
     print 'Launching camera server on port', port
     httpd = create_server('', port, app)
 

@@ -7,7 +7,7 @@
 # ! video/x-raw-yuv,width=640,height=480,framerate=5/1 \
 # ! theoraenc \
 
-#sudo modprobe bcm2835-v4l2
+sudo modprobe bcm2835-v4l2
 
 v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=5
 v4l2-ctl -V
@@ -23,7 +23,8 @@ v4l2-ctl -V
 
 # v4l2-ctl --stream-mmap=3 --stream-to=- | \
 
-gst-launch-0.10 v4l2src pixel-aspect-ratio=640/480 \
-! videorate ! image/jpeg,framerate=1/1 \
+gst-launch-0.10 v4l2src \
+! videorate \
+! image/jpeg,width=640,height=480,framerate=1/1 \
 ! multipartmux boundary=spionisto \
 ! tcpclientsink port=9999
