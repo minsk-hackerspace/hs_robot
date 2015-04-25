@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #based on the ideas from http://synack.me/blog/implementing-http-live-streaming
 # Run this script and then launch the following pipeline:
-# gst-launch videotestsrc pattern=ball ! video/x-raw-rgb, framerate=15/1, width=640, height=480 !  jpegenc ! multipartmux boundary=spionisto ! tcpclientsink port=9999
+# videostreaming-gst.sh
 
 from Queue import Queue
 from threading import Thread
