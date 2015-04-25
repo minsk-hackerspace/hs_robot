@@ -31,10 +31,10 @@ gst-launch-0.10 -v v4l2src device=/dev/video0  \
 ! videorate \
 ! video/x-raw-yuv, framerate=15/1 \
 ! videoscale \
-! video/x-raw-yuv, framerate=15/1, width=243, height=243 \
+! video/x-raw-yuv, framerate=15/1, width=486, height=486 \
 ! ffmpegcolorspace \
-! video/x-raw-rgb, framerate=15/1, width=243, height=243 \
-! clockoverlay halign=right valign=bottom shaded-background=true time-format="%Y.%m.%D" \
+! video/x-raw-rgb, framerate=15/1, width=486, height=486 \
+! clockoverlay halign=right valign=bottom shaded-background=true time-format="%Y - %H:%M:%S" \
 ! jpegenc quality=20 \
 ! multipartmux boundary=spionisto \
 ! tcpclientsink port=9999
