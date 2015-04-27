@@ -45,7 +45,7 @@ ERROR_404 = """
 class IPCameraApp(object):
     queues = []
 
-    def __call__(self, environ, start_response):    
+    def __call__(self, environ, start_response):
         if environ['PATH_INFO'] == '/':
             start_response("200 OK", [
                 ("Content-Type", "text/html"),
@@ -86,7 +86,7 @@ def input_loop(app):
         while data:
             readable = select([sd], [], [], 0.1)[0]
             for s in readable:
-                data = s.recv(1024)
+                data = s.recv(32*1024)
                 if not data:
                     break
                 for q in app.queues:
