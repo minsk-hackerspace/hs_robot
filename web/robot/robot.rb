@@ -34,16 +34,12 @@ class Robot
     @gpio.pins[:dir_b].on
     @gpio.pins[:pwm_a].off
     @gpio.pins[:pwm_b].on
-    sleep 0.3
-    stop
   end
 
   def right
     @gpio.pins[:dir_a].on
     @gpio.pins[:pwm_a].on
     @gpio.pins[:pwm_b].off
-    sleep 0.3
-    stop
   end
 
   def stop
@@ -51,6 +47,7 @@ class Robot
     @gpio.pins[:dir_b].off
     @gpio.pins[:pwm_a].off
     @gpio.pins[:pwm_b].off
+    p 'stopped'
   end
 
   def destroy

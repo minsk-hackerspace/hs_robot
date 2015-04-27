@@ -22,8 +22,12 @@ loop do
       @robot.backward
     when 68
       @robot.right
+      sleep 0.3
+      @robot.stop
     when 65
       @robot.left
+      sleep 0.3
+      @robot.stop
     when 32
       @robot.stop
   end
