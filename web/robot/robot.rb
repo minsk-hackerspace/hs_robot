@@ -10,9 +10,9 @@ class Robot
 
   def light_switch
 	  if 0 == @gpio.pins[:led].read
-		  @gpio.pins[:dir_a].on
+		  @gpio.pins[:led].on
 	  else
-		  @gpio.pins[:dir_a].off
+		  @gpio.pins[:led].off
 	  end
   end
 
