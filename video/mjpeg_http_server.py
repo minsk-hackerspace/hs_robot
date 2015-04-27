@@ -86,7 +86,7 @@ def input_loop(app):
         while data:
             readable = select([sd], [], [], 0.1)[0]
             for s in readable:
-                data = s.recv(32*1024)
+                data = s.recv(16*1024)
                 if not data:
                     break
                 for q in app.queues:
