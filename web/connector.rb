@@ -14,6 +14,8 @@ loop do
   command = client.recv(10)
   p [command, 'received']
   case command.to_i
+    when 102
+	  @robot.light_switch
     when 83
       @robot.forward
     when 87
