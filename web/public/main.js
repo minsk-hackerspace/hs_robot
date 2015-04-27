@@ -18,4 +18,9 @@ $(document).ready(function () {
         console.log(e);
         sendCommand(e.keyCode);
     });
+    $(window).keyup(function (e) {
+        $('#text').text(e.keyCode);
+        console.log(e);
+        sendCommand("32");
+    });
 });
