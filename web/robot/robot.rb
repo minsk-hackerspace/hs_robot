@@ -5,7 +5,15 @@ class Robot
 
   def initialize
     @gpio = GPIO.instance
-    @gpio.config(pwm_a: {number: 17, direction: :out}, pwm_b: {number: 18, direction: :out}, dir_a: {number: 23, direction: :out}, dir_b: {number: 24, direction: :out})
+	@gpio.config(led: {number: 26, direction: :out}, pwm_a: {number: 17, direction: :out}, pwm_b: {number: 18, direction: :out}, dir_a: {number: 23, direction: :out}, dir_b: {number: 24, direction: :out})
+  end
+
+  def light_switch
+	  if 0 == @gpio.pins[:led].read
+		  @gpio.pins[:led].on
+	  else
+		  @gpio.pins[:led].off
+	  end
   end
 
   def forward
