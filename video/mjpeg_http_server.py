@@ -69,6 +69,8 @@ class IPCameraApp(object):
 		return
 	print "Connection accepted"
         start_response('200 OK', [('Content-type', 'multipart/x-mixed-replace; boundary=--spionisto')])
+	print "Freeze previous connection - remove queue"
+	self.queues = []
         q = Queue()
         self.queues.append(q)
 	print len(self.queues), "clients online"

@@ -29,6 +29,7 @@ start_video () {
 	if [ "$MJPEG_SESSION" != "" ]; then
 		echo "hs_robot: mjpeg is running, session: $MJPEG_SESSION"
 	else
+		rm -f /tmp/mjpeg.screen.log
 		echo "hs_robot: starting mjpeg_http_server"
 		screen -c $ROBOT_HOME/startup/screenrc/mjpeg.screenrc -S mjpeg -d -m  $ROBOT_HOME/video/mjpeg_http_server.py
 	fi
@@ -38,6 +39,7 @@ start_video () {
 	if [ "$GST_SESSION" != "" ]; then
 		echo "hs_robot: gst is running, session: $GST_SESSION"
 	else
+		rm -f /tmp/gst.screen.log
 		echo "hs_robot: starting gst_stream"
 		screen -c $ROBOT_HOME/startup/screenrc/gst.screenrc -S gst -d -m  $ROBOT_HOME/video/gst_stream.sh
 	fi

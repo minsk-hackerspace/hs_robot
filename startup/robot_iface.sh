@@ -29,6 +29,7 @@ start_sinatra () {
 	if [ "$CONNECTOR_SESSION" != "" ]; then
 		echo "hs_robot: connector is running, session: $CONNECTOR_SESSION"
 	else
+		rm -f /tmp/connector.screen.log
 		echo "hs_robot: starting connector"
 		screen -c $ROBOT_HOME/startup/screenrc/connector.screenrc -S connector -d -m ruby $ROBOT_HOME/web/connector.rb
 	fi
@@ -36,6 +37,7 @@ start_sinatra () {
 	if [ "$MAIN_SESSION" != "" ]; then
 		echo "hs_robot: main is running, session: $MAIN_SESSION"
 	else
+		rm -f /tmp/main.screen.log
 		echo "hs_robot: starting main"
 		screen -c $ROBOT_HOME/startup/screenrc/main.screenrc -S main -d -m ruby $ROBOT_HOME/web/main.rb -o 0.0.0.0 -p 8081
 	fi
