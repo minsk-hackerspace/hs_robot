@@ -1,0 +1,4 @@
+
+deflog on
+
+logfile /tmp/mjpeg.screen.log
