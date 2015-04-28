@@ -22,7 +22,7 @@ v4l2-ctl --set-parm=$FPS
 
 # read stream by v4l2-ctl because gstreamer's v4l2src will reset frame settings to default
 # capture stream-count frames in about stream-count/framerate seconds
-v4l2-ctl --stream-mmap=3 --stream-count=5000 --stream-to=- \
+v4l2-ctl --stream-mmap=3 --stream-count=$[$FPS*3600*24] --stream-to=- \
 | gst-launch-0.10 -v fdsrc \
 ! videoparse format=GST_VIDEO_FORMAT_RGB width=$WIDTH height=$HEIGHT framerate=$FPS/1 \
 ! clockoverlay halign=right valign=bottom shaded-background=true time-format="%Y.%m.%d - %H:%M:%S" \
