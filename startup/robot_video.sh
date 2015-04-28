@@ -33,7 +33,7 @@ start_video () {
 		screen -c $ROBOT_HOME/startup/screenrc/mjpeg.screenrc -S mjpeg -d -m  $ROBOT_HOME/video/mjpeg_http_server.py
 	fi
 
-	sleep 1
+	sleep 2
 
 	if [ "$GST_SESSION" != "" ]; then
 		echo "hs_robot: gst is running, session: $GST_SESSION"
@@ -53,6 +53,7 @@ case "$1" in
 		;;
 	restart)
 		stop_video
+		sleep 10
 		start_video
 		;;
 	*)

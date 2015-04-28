@@ -9,7 +9,7 @@ from socket import socket
 from select import select
 from wsgiref.simple_server import WSGIServer, make_server, WSGIRequestHandler
 from SocketServer import ThreadingMixIn
-
+from datetime import datetime
 
 class MyWSGIServer(ThreadingMixIn, WSGIServer):
      pass 
@@ -62,15 +62,26 @@ class IPCameraApp(object):
             return iter([ERROR_404])
 
     def stream(self, start_response):
+	print len(self.queues), "clients online"
+	if len(self.queues) >= 4:
+	        start_response('503 Service Unavailable', [])
+		print "Connection declined"
+		return
+	print "Connection accepted"
         start_response('200 OK', [('Content-type', 'multipart/x-mixed-replace; boundary=--spionisto')])
         q = Queue()
         self.queues.append(q)
+	print len(self.queues), "clients online"
         while True:
             try:
-                yield q.get()
+                data = q.get()
+#		print  str(datetime.now()), ': yield:', len(data), 'bytes'
+		yield data
             except:
                 if q in self.queues:
                     self.queues.remove(q)
+		print "Client disconnected"
+		print len(self.queues), "clients online"
                 return
 
 
@@ -87,10 +98,14 @@ def input_loop(app):
             readable = select([sd], [], [], 0.1)[0]
             for s in readable:
                 data = s.recv(16*1024)
+#		print str(datetime.now()), ': rcvd:', len(data), 'bytes'
                 if not data:
                     break
-                for q in app.queues:
-                    q.put(data)
+                try:
+			for q in app.queues:
+				q.put(data)
+		except:
+			pass
         print 'Lost input stream from', addr
 
 if __name__ == '__main__':
