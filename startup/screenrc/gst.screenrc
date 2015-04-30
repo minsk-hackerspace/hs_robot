@@ -1,4 +1,0 @@
-
-deflog on
-
-logfile /var/log/gst.screen.log

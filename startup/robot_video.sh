@@ -1,6 +1,3 @@
-#!/bin/sh
-
-ROBOT_HOME=`dirname $0`/../
 
 MJPEG_SESSION=$(screen -ls | grep mjpeg | awk '{print $1}')
 
@@ -25,23 +22,3 @@ start_video () {
 	fi
 
 }
-
-case "$1" in
-	start)
-		start_video
-		;;
-	stop) 
-		stop_video
-		;;
-	restart)
-		stop_video
-		sleep 2
-		start_video
-		;;
-	*)
-		echo "Usage: $0 start|stop|restart"
-		exit 1
-		;;
-	esac
-
-
