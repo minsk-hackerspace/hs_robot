@@ -20,7 +20,6 @@ start_video () {
 	if [ "$MJPEG_SESSION" != "" ]; then
 		echo "hs_robot: mjpeg is running, session: $MJPEG_SESSION"
 	else
-		sudo rm -f /tmp/mjpeg.screen.log
 		echo "hs_robot: starting mjpeg_http_server"
 		screen -c $ROBOT_HOME/startup/screenrc/mjpeg.screenrc -S mjpeg -d -m  $ROBOT_HOME/startup/mjpeg_streamer_start.sh
 	fi

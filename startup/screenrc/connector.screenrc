@@ -1,4 +1,4 @@
 
 deflog on
 
-logfile /tmp/connector.screen.log
+logfile /var/log/connector.screen.log

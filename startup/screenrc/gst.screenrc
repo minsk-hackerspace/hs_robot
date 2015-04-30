@@ -1,4 +1,4 @@
 
 deflog on
 
-logfile /tmp/gst.screen.log
+logfile /var/log/gst.screen.log
