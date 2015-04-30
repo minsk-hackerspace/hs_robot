@@ -15,18 +15,22 @@ loop do
   p [command, 'received']
   case command.to_i
     when 70
-	  @robot.light_switch
+      @robot.light_switch
     when 83
       @robot.forward
+      sleep 0.5
+      @robot.stop
     when 87
       @robot.backward
+      sleep 0.5
+      @robot.stop
     when 68
       @robot.right
-      sleep 0.3
+      sleep 0.15
       @robot.stop
     when 65
       @robot.left
-      sleep 0.3
+      sleep 0.15
       @robot.stop
     when 32
       @robot.stop
