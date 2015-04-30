@@ -1,5 +1,6 @@
 require 'singleton'
 
+
 class Hash
   def method_missing(name, *args, &block)
     return self[name.to_sym]
@@ -64,7 +65,7 @@ class GPIO
 
     def log(msg)
       puts msg
-      File.open("log.log", "w+") do |f|
+      File.open(File.expand_path('~') + "/gpio.log", "w+") do |f|
         f.write msg
       end
     end
