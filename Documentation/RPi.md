@@ -12,6 +12,10 @@ http://groenholdt.net/Computers/RaspberryPi/MediaTek-MT7601-USB-WIFI-on-the-Rasp
 http://raspberrypi.stackexchange.com/questions/27173/issue-with-mt7601u-usb-dongle-wifi-driver
 
 
+http://elinux.org/RPi_USB_Wi-Fi_Adapters
+https://wikidevi.com/wiki/List_of_Wi-Fi_Device_IDs_in_Linux
+
+
 
 Запуск камеры и простая трансляция по сети
 
