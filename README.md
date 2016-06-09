@@ -1,5 +1,5 @@
 Hackable Armata platform.
 
-RPi + ... + WiFi + ... + web interface + ... .
+RPi + webcam (...) + WiFi + ... + web interface + ... .
 
 ![armata](tank_platform.jpg "MXC BiRth0-dAy tank")
