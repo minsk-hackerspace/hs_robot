@@ -9,10 +9,11 @@ class GPIO
 
   def write_bulk(commands:)
     command_str = ''
-    commands.each do |command|
-      command_str << "gpio write #{command[:pin]} #{command[:value]} && "
+    commands.each_pair do |pin, value|
+      command_str << "gpio write #{pin} #{value} && "
     end
     command_str << 'echo finish'
+    p command_str
     `#{command_str}`
   end
 end
@@ -30,8 +31,9 @@ class Robot
   IN = 'in'.freeze
   PWM = 'pwm'.freeze
 
-  def initialize
-    @gpio = GPIO.new
+  def self.init
+    p 'gpio init'
+    @gpio ||= GPIO.new
     @gpio.mode(STAND_BY, OUT)
     @gpio.mode(PWM_A, OUT)
     @gpio.mode(PWM_B, OUT)
@@ -43,70 +45,76 @@ class Robot
     @gpio.write STAND_BY, 1
   end
 
+  def initialize
+    @gpio ||= GPIO.new
+  end
+
   def forward
-    right_forward
-    left_forward
+    @gpio.write_bulk(commands: right_forward.merge(left_forward))
   end
 
   def backward
-    left_backward
-    right_backward
+    @gpio.write_bulk(commands: left_backward.merge(right_backward))
   end
 
   def left
-    left_forward
-    right_stop
+    @gpio.write_bulk(commands: left_forward.merge(right_stop))
   end
 
   def right
-    right_forward
-    left_stop
+    @gpio.write_bulk(commands: right_forward.merge(left_stop))
   end
 
   def stop
-    left_stop
-    right_stop
-  end
-
-  def destroy
-    @gpio.destroy
+    @gpio.write_bulk(commands: left_stop.merge(right_stop))
   end
 
   def left_forward
-    @gpio.write AIN1, 1
-    @gpio.write AIN2, 0
-    @gpio.write PWM_A, 1
+    {
+        AIN1 => 1,
+        AIN2 => 0,
+        PWM_A => 1
+    }
   end
 
   def right_forward
-    @gpio.write BIN1, 1
-    @gpio.write BIN2, 0
-    @gpio.write PWM_B, 1
+    {
+        BIN1 => 1,
+        BIN2 => 0,
+        PWM_B => 1
+    }
   end
 
   def left_stop
-    #   alias stopb='gpio write $BIN1 0 && gpio write $BIN2 0 && gpio write $PWMB 1'
-    @gpio.write AIN1, 0
-    @gpio.write AIN2, 0
-    @gpio.write PWM_A, 1
+    {
+        AIN1 => 0,
+        AIN2 => 0,
+        PWM_A => 1
+    }
   end
 
   def right_stop
-    @gpio.write BIN1, 0
-    @gpio.write BIN2, 0
-    @gpio.write PWM_B, 1
+    {
+        BIN1 => 0,
+        BIN2 => 0,
+        PWM_B => 1
+    }
   end
 
   def right_backward
-    @gpio.write BIN1, 0
-    @gpio.write BIN2, 1
-    @gpio.write PWM_B, 1
+    {
+        BIN1 => 0,
+        BIN2 => 1,
+        PWM_B => 1
+    }
   end
 
   def left_backward
-    @gpio.write AIN1, 0
-    @gpio.write AIN2, 1
-    @gpio.write PWM_A, 1
+    {
+        AIN1 => 0,
+        AIN2 => 1,
+        PWM_A => 1
+    }
   end
 
   def stand_by

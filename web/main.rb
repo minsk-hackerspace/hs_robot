@@ -6,6 +6,7 @@ set :bind, '0.0.0.0'
 
 get '/' do
   haml :index, layout: :main
+  @robot ||= Robot.init
 end
 
 get '/answer' do
